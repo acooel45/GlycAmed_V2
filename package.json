@@ -1,0 +1,25 @@
+{
+  "name": "glycamed_v2",
+  "version": "1.0.0",
+  "description": "L'objectif de ce projet est de créer une application web où n'importe quel étudiant de l'école peut se connecter et ajouter un événement : avoir vu Amed, un élève de l'école addict aux boissons énergisantes, en consommer une.  De son côté, Amed aura une vue sur ces rapports et pourra connaître la quantité de sucre, de caféine et de calories qu'il ingère sans s'en rendre compte afin de potentiellement le faire prendre conscience des risques qu'il prend pour sa santé.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acooel45/GlycAmed_V2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acooel45/GlycAmed_V2/issues"
+  },
+  "homepage": "https://github.com/acooel45/GlycAmed_V2#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.7"
+  },
+  "dependencies": {
+    "@sentry/browser": "^10.33.0"
+  }
+}
