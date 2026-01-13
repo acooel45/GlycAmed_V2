@@ -1,8 +1,10 @@
+import { CONFIG } from "./constants.js";
+
 const tableBody = document.getElementById("recent-consumptions-body");
 
 async function loadHistory() {
     try {
-        const response = await fetch("http://localhost:3000/api/consumption/all");
+        const response = await fetch(`${CONFIG.API_URL}/consumption/all`);
 
         if (!response.ok) {
             console.error("Erreur API :", response.status);

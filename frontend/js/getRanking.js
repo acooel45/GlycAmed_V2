@@ -1,8 +1,10 @@
+import { CONFIG } from "./constants.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
     const tbody = document.querySelector("table tbody");
 
     try {
-        const response = await fetch("http://localhost:3000/api/consumption/ranking");
+        const response = await fetch(`${CONFIG.API_URL}/consumption/ranking`);
         const ranking = await response.json();
 
         tbody.innerHTML = "";

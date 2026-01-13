@@ -1,3 +1,5 @@
+import { CONFIG } from "./constants";
+
 const form = document.querySelector(".register-form");
 
 form.addEventListener("submit", async function (e) {
@@ -9,7 +11,7 @@ form.addEventListener("submit", async function (e) {
   const password = document.querySelector("#password").value;
 
   try {
-    const response = await fetch("http://localhost:3000/api/auth/register", {
+    const response = await fetch(`${CONFIG.API_URL}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

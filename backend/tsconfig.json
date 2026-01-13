@@ -36,6 +36,6 @@
       "@utils/*": ["utils/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../frontend/js/constants.js"],
   "exclude": ["node_modules", "dist"]
 }

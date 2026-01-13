@@ -1,3 +1,5 @@
+import { CONFIG } from "./constants.js";
+
 const input = document.getElementById("product");
 const resultsBox = document.getElementById("autocomplete-results");
 const spinner = document.getElementById("loading-spinner");
@@ -25,7 +27,7 @@ function triggerSearch() {
 async function searchProducts(query) {
     try {
         const response = await fetch(
-            `http://localhost:3000/api/products/search?name=${encodeURIComponent(query)}`
+            `${CONFIG.API_URL}/products/search?name=${encodeURIComponent(query)}`
         );
 
         const products = await response.json();

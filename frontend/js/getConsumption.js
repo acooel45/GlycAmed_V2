@@ -1,3 +1,5 @@
+import { CONFIG } from "./config.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
     const tbody = document.getElementById("recent-consumptions-body");
 
@@ -12,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // }
 
     try {
-        const response = await fetch("http://localhost:3000/api/consumption/all", {
+        const response = await fetch(`${CONFIG.API_URL}/consumption/all`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
