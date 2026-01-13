@@ -1,38 +1,34 @@
-import { CONFIG } from "./constants";
+import ApiService from "./api.js";
 
 const form = document.querySelector(".register-form");
 
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  const firstname = document.querySelector("#firstname").value;
-  const lastname = document.querySelector("#lastname").value;
-  const email = document.querySelector("#email").value;
+  const firstname = document.querySelector("#firstname").value.trim();
+  const lastname = document.querySelector("#lastname").value.trim();
+  const email = document.querySelector("#email").value.trim();
   const password = document.querySelector("#password").value;
 
+  if (!firstname || !lastname || !email || !password) {
+    alert("Veuillez remplir tous les champs !");
+    return;
+  }
+
   try {
-    const response = await fetch(`${CONFIG.API_URL}/auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ firstname, lastname, email, password })
+    const data = await ApiService.post("/auth/register", {
+      firstname,
+      lastname,
+      email,
+      password,
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      alert(data.message || "Erreur lors de l'inscription");
-      return;
-    }
-
-    localStorage.setItem("token", data.token); // store token
+    localStorage.setItem("token", data.token);
     window.location.href = "index.html";
 
     console.log("User registered:", data.user);
-
-  } catch (err) {
-    console.error(err);
-    alert("Connexion au serveur impossible");
+  } catch (error) {
+    console.error("Erreur inscription :", error.message);
+    alert(error.message || "Connexion au serveur impossible");
   }
 });

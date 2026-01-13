@@ -1,4 +1,5 @@
 import { CONFIG } from "./constants.js";
+import ApiService from "./api.js";
 
 const form = document.querySelector(".login-form");
 
@@ -9,7 +10,7 @@ form.addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value;
 
     try {
-        const response = await fetch(`${CONFIG.API_URL}/auth/login`, {
+        const response = await ApiService.post("/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })
