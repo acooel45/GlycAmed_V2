@@ -1,4 +1,3 @@
-import { CONFIG } from "./constants.js";
 import ApiService from "./api.js";
 
 const form = document.querySelector(".login-form");
@@ -9,24 +8,21 @@ form.addEventListener("submit", async (e) => {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
+    if (!email || !password) {
+        alert("Email et mot de passe requis");
+        return;
+    }
+
     try {
-        const response = await ApiService.post("/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password })
-        });
+        const data = await ApiService.post("/auth/login", { email, password });
 
-        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
 
-        if (response.ok) {
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
-            window.location.href = "index.html";
-        } else {
-            alert(data.error || "Login échoué");
-        }
+        window.location.href = "index.html";
+
     } catch (err) {
-        console.error(err);
-        alert("Erreur réseau");
+        console.error("Erreur login :", err);
+        alert(err.message || "Erreur réseau");
     }
 });

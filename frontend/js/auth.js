@@ -1,16 +1,21 @@
-// Script to handle "login or logout" text on the button in the navbar
-const token = localStorage.getItem("token");
+import Store from "./store.js";
+
 const loginButton = document.querySelector("nav button a");
 
-if (token) {
-  loginButton.textContent = "Logout";
+Store.subscribe((state) => {
+  if (state.user) {
+    loginButton.textContent = "Logout";
+    loginButton.href = "#";
 
-  loginButton.addEventListener("click", () => {
-    localStorage.removeItem("token");
-    window.location.reload();
-  });
+    loginButton.onclick = () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      Store.setState({ user: null });
+    };
 
-} else {
-  loginButton.textContent = "Login";
-  loginButton.href = "login.html";
-}
+  } else {
+    loginButton.textContent = "Login";
+    loginButton.href = "login.html";
+    loginButton.onclick = null;
+  }
+});

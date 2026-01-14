@@ -1,21 +1,22 @@
-(function () {
-    const protectedPages = [
-        "/frontend/addConsumption.html",
-        "/frontend/historique.html",
-        "/frontend/ranking.html",
-        "/frontend/report.html",
-        "/frontend/statistics.html"
-    ];
+import Store from "./store.js";
 
-    const currentPath = window.location.pathname;
+const protectedPages = [
+  "/frontend/addConsumption.html",
+  "/frontend/historique.html",
+  "/frontend/ranking.html",
+  "/frontend/report.html",
+  "/frontend/statistics.html"
+];
 
-    const isProtected = protectedPages.some(page => currentPath.endsWith(page));
+const currentPath = window.location.pathname;
+const isProtected = protectedPages.some(page =>
+  currentPath.endsWith(page)
+);
 
-    if (isProtected) {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-            window.location.href = "login.html";
-        }
+if (isProtected) {
+  Store.subscribe((state) => {
+    if (!state.user) {
+      window.location.href = "login.html";
     }
-})();
+  });
+}
